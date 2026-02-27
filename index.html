@@ -1,531 +1,1428 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jaji - Professional Profile</title>
-  </head>
-  <body>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            --color-bg: #FAFAF9;
+            --color-bg-alt: #F5F4F0;
+            --color-surface: #FFFFFF;
+            --color-text: #1A1A1A;
+            --color-text-muted: #6B6B6B;
+            --color-accent: #2D5A4A;
+            --color-accent-light: #3D7A64;
+            --color-accent-subtle: rgba(45, 90, 74, 0.08);
+            --color-border: rgba(0, 0, 0, 0.06);
+            --color-gold: #C4A052;
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.08);
+            --transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .dark {
+            --color-bg: #0D0D0D;
+            --color-bg-alt: #141414;
+            --color-surface: #1A1A1A;
+            --color-text: #F5F4F0;
+            --color-text-muted: #9A9A9A;
+            --color-accent: #5BA88A;
+            --color-accent-light: #7BC4A8;
+            --color-accent-subtle: rgba(91, 168, 138, 0.12);
+            --color-border: rgba(255, 255, 255, 0.08);
+            --color-gold: #D4B062;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.4);
+        }
+        
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+         ::selection {
+            background: var(--color-accent);
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        /* ===== HEADER / HERO ===== */
+        
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(ellipse at 20% 80%, var(--color-accent-subtle) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(196, 160, 82, 0.05) 0%, transparent 50%), var(--color-bg);
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 120%;
+            background: linear-gradient(135deg, var(--color-accent-subtle) 0%, transparent 60%);
+            border-radius: 50%;
+            animation: floatBg 20s ease-in-out infinite;
+        }
+        
+        @keyframes floatBg {
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(-30px, 30px) rotate(5deg);
+            }
+        }
+        
+        .header-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 40px 20px;
+        }
+        
+        .hero-img {
+            margin-bottom: 40px;
+            animation: fadeUp 1s ease-out 0.2s both;
+        }
+        
+        .hero-img img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--color-surface);
+            box-shadow: 0 0 0 1px var(--color-border), var(--shadow-lg), 0 0 60px rgba(45, 90, 74, 0.15);
+            transition: var(--transition);
+        }
+        
+        .hero-img img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 1px var(--color-border), var(--shadow-lg), 0 0 80px rgba(45, 90, 74, 0.25);
+        }
+        
+        .header-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+            animation: fadeUp 1s ease-out 0.4s both;
+            background: linear-gradient(135deg, var(--color-text) 0%, var(--color-text-muted) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--color-text-muted);
+            font-weight: 400;
+            margin-bottom: 32px;
+            animation: fadeUp 1s ease-out 0.6s both;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            animation: fadeUp 1s ease-out 0.8s both;
+        }
+        
+        .social-links a {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-surface);
+            color: var(--color-text);
+            border-radius: var(--radius-full);
+            text-decoration: none;
+            border: 1px solid var(--color-border);
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+        
+        .social-links a:hover {
+            background: var(--color-accent);
+            color: white;
+            border-color: var(--color-accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(45, 90, 74, 0.2);
+        }
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* ===== NAVIGATION ===== */
+        
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(250, 250, 249, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--color-border);
+            transition: var(--transition);
+        }
+        
+        .dark nav {
+            background: rgba(13, 13, 13, 0.85);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+        
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-text);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .logo:hover {
+            color: var(--color-accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+        }
+        
+        .nav-links a {
+            display: block;
+            padding: 10px 18px;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: var(--radius-full);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-text);
+            background: var(--color-accent-subtle);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            width: 44px;
+            height: 44px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            color: var(--color-text);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .mobile-menu-btn:hover {
+            background: var(--color-accent-subtle);
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: var(--color-surface);
+                flex-direction: column;
+                padding: 16px;
+                border-bottom: 1px solid var(--color-border);
+                box-shadow: var(--shadow-md);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links a {
+                padding: 14px 20px;
+                border-radius: var(--radius-md);
+            }
+        }
+        /* ===== MAIN CONTENT ===== */
+        
+        main {
+            padding: 80px 0;
+        }
+        
+        section {
+            margin-bottom: 120px;
+        }
+        
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 48px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-accent), var(--color-gold));
+            border-radius: 2px;
+        }
+        /* ===== ABOUT SECTION ===== */
+        
+        .bio-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        
+        @media (max-width: 900px) {
+            .bio-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+        
+        .bio-text p {
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+            color: var(--color-text-muted);
+        }
+        
+        .bio-text p b {
+            color: var(--color-text);
+            font-weight: 600;
+        }
+        
+        .bio-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        .stat-item {
+            background: var(--color-surface);
+            padding: 28px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            transition: var(--transition);
+        }
+        
+        .stat-item:hover {
+            border-color: var(--color-accent);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+        
+        .stat-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .stat-title i {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-accent-subtle);
+            color: var(--color-accent);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+        }
+        
+        .stat-title span {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--color-text);
+        }
+        
+        .stat-info p {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            margin-bottom: 8px;
+            padding-left: 52px;
+        }
+        
+        .stat-info p:last-child {
+            margin-bottom: 0;
+        }
+        /* ===== IMAGE SECTION ===== */
+        
+        #image-section {
+            background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+            padding: 80px 0;
+            margin: 0 -24px 120px;
+            border-radius: var(--radius-lg);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #image-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+        }
+        
+        .image-section-content {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            position: relative;
+            z-index: 1;
+            padding: 0 24px;
+        }
+        
+        @media (max-width: 768px) {
+            .image-section-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        #image-section .hero-img img {
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+        
+        .image-section-description h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.75rem, 3vw, 2.25rem);
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .image-section-description p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .image-section-description p b {
+            color: white;
+        }
+        /* ===== CAREER TIMELINE ===== */
+        
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--color-accent), var(--color-gold), transparent);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 8px;
+            width: 18px;
+            height: 18px;
+            background: var(--color-bg);
+            border: 3px solid var(--color-accent);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover::before {
+            background: var(--color-accent);
+            box-shadow: 0 0 0 6px var(--color-accent-subtle);
+        }
+        
+        .timeline-content {
+            background: var(--color-surface);
+            padding: 28px 32px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            transition: var(--transition);
+        }
+        
+        .timeline-item:hover .timeline-content {
+            border-color: var(--color-accent);
+            box-shadow: var(--shadow-md);
+            transform: translateX(8px);
+        }
+        
+        .timeline-date {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            background: var(--color-accent-subtle);
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            margin-bottom: 12px;
+        }
+        
+        .timeline-title {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--color-text);
+        }
+        
+        .timeline-desc {
+            color: var(--color-text-muted);
+            font-size: 1rem;
+        }
+        
+        .timeline-content button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            font-family: var(--font-body);
+            background: var(--color-accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .timeline-content button:hover {
+            background: var(--color-accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(45, 90, 74, 0.25);
+        }
+        /* ===== EXPERTISE SECTION ===== */
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        
+        .skill-card {
+            background: var(--color-surface);
+            padding: 36px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-accent), var(--color-gold));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+        
+        .skill-card:hover {
+            border-color: var(--color-accent);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-8px);
+        }
+        
+        .skill-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .skill-icon {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-accent-subtle);
+            color: var(--color-accent);
+            border-radius: var(--radius-lg);
+            font-size: 1.75rem;
+            transition: var(--transition);
+        }
+        
+        .skill-card:hover .skill-icon {
+            background: var(--color-accent);
+            color: white;
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .skill-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--color-text);
+        }
+        
+        .skill-desc {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+        /* ===== POLITICS SECTION ===== */
+        
+        #politics .bio-text ul {
+            margin-left: 0;
+            margin-bottom: 24px;
+            list-style: none;
+        }
+        
+        #politics .bio-text li {
+            margin-bottom: 16px;
+            padding: 20px 24px;
+            background: var(--color-surface);
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--color-accent);
+            transition: var(--transition);
+        }
+        
+        #politics .bio-text li:hover {
+            box-shadow: var(--shadow-sm);
+            transform: translateX(8px);
+        }
+        
+        #politics .bio-text li strong {
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+        /* ===== ACHIEVEMENTS SECTION ===== */
+        
+        .achievements-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        
+        .achievement-item {
+            background: var(--color-surface);
+            padding: 36px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .achievement-item::before {
+            content: '';
+            position: absolute;
+            top: 32px;
+            left: 0;
+            width: 4px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--color-accent), var(--color-gold));
+            border-radius: 0 2px 2px 0;
+        }
+        
+        .achievement-item:hover {
+            border-color: var(--color-accent);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-8px);
+        }
+        
+        .achievement-title {
+            font-family: var(--font-display);
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--color-text);
+        }
+        
+        .achievement-desc {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+        /* ===== CONTACT SECTION ===== */
+        
+        .contact-container {
+            background: var(--color-surface);
+            padding: 48px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+        }
+        
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+        }
+        
+        .contact-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        
+        .contact-icon {
+            width: 56px;
+            height: 56px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-accent-subtle);
+            color: var(--color-accent);
+            border-radius: var(--radius-md);
+            font-size: 1.25rem;
+            transition: var(--transition);
+        }
+        
+        .contact-item:hover .contact-icon {
+            background: var(--color-accent);
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .contact-text h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-muted);
+            margin-bottom: 6px;
+        }
+        
+        .contact-text p {
+            font-size: 1rem;
+            color: var(--color-text);
+        }
+        
+        .contact-text a {
+            color: var(--color-accent);
+            text-decoration: none;
+            word-break: break-all;
+        }
+        
+        .contact-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        @media (max-width: 480px) {
+            .contact-container {
+                padding: 24px;
+            }
+            .contact-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .contact-icon {
+                margin-bottom: 8px;
+            }
+        }
+        
+        .contact-text a:hover {
+            text-decoration: underline;
+        }
+        /* ===== FOOTER ===== */
+        
+        footer {
+            background: var(--color-bg-alt);
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+        
+        .footer-col h3 {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--color-text);
+        }
+        
+        .footer-col>p {
+            color: var(--color-text-muted);
+            line-height: 1.8;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: var(--color-text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-links a::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-accent);
+            transform: translateX(8px);
+        }
+        
+        .footer-links a:hover::before {
+            opacity: 1;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid var(--color-border);
+        }
+        
+        .footer-bottom p {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+        /* ===== ANIMATIONS ===== */
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* ===== SCROLLBAR ===== */
+        
+         ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+         ::-webkit-scrollbar-track {
+            background: var(--color-bg);
+        }
+        
+         ::-webkit-scrollbar-thumb {
+            background: var(--color-text-muted);
+            border-radius: 5px;
+        }
+        
+         ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-accent);
+        }
+    </style>
+</head>
+
+<body>
     <!-- Header Section -->
     <header>
-      <div class="container">
-        <div class="header-content">
-          <div class="profile-img">
-            <span
-              ><img
-                src="./images/Abdulsalam.jpg"
-                alt="Abdulsalam Shehu Jaji"
-                width="150"
-                height="150"
-                class="profile-picture"
-                id="profile-picture"
-            /></span>
-          </div>
-          <h1 class="header-title">Abdulsalam Shehu Jaji</h1>
-          <p class="header-subtitle">
-            Chief Executive Officer | Business Administrator | Economic
-            Strategist
-          </p>
-          <div class="social-links">
-            <a href="#" aria-label="LinkedIn"
-              ><i class="fab fa-linkedin-in"></i
-            ></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="Facebook"
-              ><i class="fab fa-facebook-f"></i
-            ></a>
-            <a href="#" aria-label="Instagram"
-              ><i class="fab fa-instagram"></i
-            ></a>
-          </div>
+        <div class="container">
+            <div class="header-content">
+                <div class="hero-img" style="flex-shrink: 0;">
+                    <img src="./Abdulsalam.jpg" alt="jaji">
+                </div>
+                <h1 class="header-title">Abdulsalam Shehu Jaji</h1>
+                <p class="header-subtitle">
+                    Chief Executive Officer | Business Administrator | Economic Strategist
+                </p>
+                <div class="social-links">
+                    <a href="https://x.com/Powerfulabdul?t=31dMyeW4Typi9ckZbW0v9Q&s=08" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.facebook.com/share/1EAv8mCkAi/" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/abdullekan/profilecard/?igsh=MTBrZHQ2ZjY2dnN1cg==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
         </div>
-      </div>
     </header>
 
     <!-- Navigation -->
     <nav>
-      <div class="container nav-container">
-        <a href="#" class="logo">Abdulsalam Shehu Jaji</a>
-        <button class="mobile-menu-btn" aria-label="Toggle menu">
+        <div class="container nav-container">
+            <a href="#" class="logo">Abdulsalam Shehu Jaji</a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
           <i class="fas fa-bars"></i>
         </button>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#career">Career</a></li>
-          <li><a href="#expertise">Expertise</a></li>
-          <li><a href="#politics">Politics</a></li>
-          <li><a href="#achievements">Achievements</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#career">Career</a></li>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#politics">Politics</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
     </nav>
 
     <!-- Main Content -->
     <main>
-      <div class="container">
-        <!-- About Section -->
-        <section id="about">
-          <h2 class="section-title">About Abdulsalam Shehu Jaji</h2>
-          <div class="bio-content">
-            <div class="bio-text">
-              <p>
-                <b>Abdulsalam Shehu Jaji </b>was born in Ile Jaji, Ogba, Idi
-                Ape, in Magagi Aare Ward. His journey began with a solid
-                educational foundation that has shaped his professional
-                trajectory and expertise in business administration and economic
-                development.
-              </p>
+        <div class="container">
+            <!-- About Section -->
+            <section id="about" class="reveal">
+                <h2 class="section-title">About Abdulsalam Shehu Jaji</h2>
+                <div class="bio-content">
+                    <div class="bio-text">
+                        <p>
+                            <b>Abdulsalam Shehu Jaji </b>was born in Ile Jaji, Ogba, Idi Ape, in Magagi Aare Ward. His journey began with a solid educational foundation that has shaped his professional trajectory and expertise in business administration
+                            and economic development.
+                        </p>
 
-              <p>
-                With a diverse educational background spanning accounting,
-                economics, and business administration, Jaji has cultivated a
-                multifaceted skill set that has enabled him to excel in various
-                leadership roles throughout his career.
-              </p>
+                        <p>
+                            With a diverse educational background spanning accounting, economics, and business administration, Jaji has cultivated a multifaceted skill set that has enabled him to excel in various leadership roles throughout his career.
+                        </p>
 
-              <p>
-                Currently serving as the Chief Executive Officer of Pagers World
-                Global Construction and Crome Nigeria Enterprise, Jaji continues
-                to leverage his expertise to drive innovation and growth in the
-                business sector while exploring opportunities to contribute to
-                public policy and governance.
-              </p>
-            </div>
+                        <p>
+                            Currently serving as the Chief Executive Officer of Pagers World Global Construction and Crome Nigeria Enterprise, Jaji continues to leverage his expertise to drive innovation and growth in the business sector while exploring opportunities to contribute
+                            to public policy and governance.
+                        </p>
+                    </div>
 
-            <div class="bio-stats">
-              <div class="stat-item">
-                <div class="stat-title">
-                  <i class="fas fa-graduation-cap"></i>
-                  <span>Education</span>
+                    <div class="bio-stats">
+                        <div class="stat-item">
+                            <div class="stat-title">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>Education</span>
+                            </div>
+                            <div class="stat-info">
+                                <p>MSc in Business Administration, Sokoto State University (2018)
+                                </p>
+                                <p>BSc in Economics, Lagos State University (2008)</p>
+                                <p>National Diploma in Accounting, Kwara State Polytechnic (2002)
+                                </p>
+                                <p>WAEC Certificate, Mount Carmel College, Ilorin (1996)</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-title">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Current Position</span>
+                            </div>
+                            <div class="stat-info">
+                                <p>Chief Executive Officer at Pagers World Global Construction
+                                </p>
+                                <p>Chief Executive Officer at Crome Nigeria Enterprise</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-title">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Origin</span>
+                            </div>
+                            <div class="stat-info">
+                                <p>Ile Jaji, Ogba, Idi Ape, Magagi Aare Ward, Ilorin Kwara State.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat-info">
-                  <p>
-                    MSc in Business Administration, Sokoto State University
-                    (2018)
-                  </p>
-                  <p>BSc in Economics, Lagos State University (2008)</p>
-                  <p>
-                    National Diploma in Accounting, Kwara State Polytechnic
-                    (2002)
-                  </p>
-                  <p>WAEC Certificate, Mount Carmel College, Ilorin (1996)</p>
+            </section>
+
+            <!-- Image Section -->
+            <section id="image-section" class="reveal">
+                <div class="container">
+                    <div class="image-section-content">
+                        <div class="hero-img" style="flex-shrink: 0;">
+                            <img src="./Abdulsalam.jpg" alt="jaji">
+                        </div>
+                        <div class="image-section-description">
+                            <h2>Abdulsalam Shehu Jaji</h2>
+                            <p>
+                                <b>Abdulsalam Shehu Jaji</b> is a visionary leader with a proven track record in business administration, economic strategy, and organizational transformation. His dedication to excellence and innovation has positioned
+                                him as a key figure in driving sustainable growth and development.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-              </div>
+            </section>
 
-              <div class="stat-item">
-                <div class="stat-title">
-                  <i class="fas fa-briefcase"></i>
-                  <span>Current Position</span>
+            <!-- Career Section -->
+            <section id="career" class="reveal">
+                <h2 class="section-title">Professional Career</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <p class="timeline-date">2021 - 2024</p>
+                            <h3 class="timeline-title">Executive Manager</h3>
+                            <p class="timeline-desc">CBM Nigeria Ltd</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <p class="timeline-date">2019 - Present</p>
+                            <h3 class="timeline-title">Admin Manager</h3>
+                            <p class="timeline-desc">CITY Dimension International</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <p class="timeline-date">2016 - 2019</p>
+                            <h3 class="timeline-title">State Public Relations Officer & Deputy Manager</h3>
+                            <p class="timeline-desc">Great Northern International Construction Company (GNIC)</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <p class="timeline-date">2011 - 2015</p>
+                            <h3 class="timeline-title">State Public Relations Officer</h3>
+                            <p class="timeline-desc">CGC Nigeria Ltd</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <p class="timeline-date">2008 - 2010</p>
+                            <h3 class="timeline-title">Business Administration Representative
+                            </h3>
+                            <p class="timeline-desc">AfricanBuys Nigeria Ltd</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <p class="timeline-date">Present</p>
+                            <h3 class="timeline-title">Chief Executive Officer</h3>
+                            <p class="timeline-desc">Pagers World Global Construction and Crome Nigeria Enterprise</p>
+                            <button onclick="window.location.href='https://pagersworldglobalconstruction.com/'">
+                  See more about pages World Global Construction
+                </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat-info">
-                  <p>
-                    Chief Executive Officer at Pagers World Global Construction
-                  </p>
-                  <p>Chief Executive Officer at Crome Nigeria Enterprise</p>
+            </section>
+
+            <!-- Expertise Section -->
+            <section id="expertise" class="reveal">
+                <h2 class="section-title">Areas of Expertise</h2>
+                <div class="skills-container">
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="skill-title">Market Research</h3>
+                        <p class="skill-desc">
+                            Specializes in comprehensive market analysis, identifying trends, consumer behaviors, and competitive landscapes to inform strategic business decisions.
+                        </p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3 class="skill-title">Market Negotiation</h3>
+                        <p class="skill-desc">
+                            Expert in developing and implementing effective negotiation strategies to secure favorable terms and build mutually beneficial business relationships.
+                        </p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 class="skill-title">Business Opportunity Identification</h3>
+                        <p class="skill-desc">
+                            Skilled at recognizing untapped market potential and emerging business opportunities through strategic analysis and industry insights.
+                        </p>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h3 class="skill-title">Business Proposal Formulation</h3>
+                        <p class="skill-desc">
+                            Proficient in crafting compelling and comprehensive business proposals that effectively communicate value propositions and strategic initiatives.
+                        </p>
+                    </div>
                 </div>
-              </div>
+            </section>
 
-              <div class="stat-item">
-                <div class="stat-title">
-                  <i class="fas fa-map-marker-alt"></i>
-                  <span>Origin</span>
+            <!-- Political Aspirations Section -->
+            <section id="politics" class="reveal">
+                <h2 class="section-title">Political Aspirations</h2>
+                <div class="bio-content">
+                    <div class="bio-text">
+                        <p>
+                            <b>Abdulsalam Shehu Jaji</b> has expressed a keen interest in transitioning his extensive business acumen to the political arena. With a strong background in economic development and market strategies, he aims to contribute
+                            meaningfully to public policy and governance.
+                        </p>
+
+                        <p>
+                            His political vision encompasses several key areas of focus:
+                        </p>
+
+                        <ul>
+                            <li>
+                                <strong>Economic Growth:</strong> Leveraging his expertise in business development to formulate policies that stimulate economic growth and create sustainable employment opportunities.
+                            </li>
+                            <li>
+                                <strong>Education Reform:</strong> Drawing from his diverse educational background to advocate for improvements in educational infrastructure and curriculum development.
+                            </li>
+                            <li>
+                                <strong>Infrastructure Development:</strong> Utilizing his experience in the construction sector to address infrastructure challenges and promote community development.
+                            </li>
+                            <li>
+                                <strong>Public-Private Partnerships:</strong> Facilitating collaboration between government entities and private sector organizations to drive innovation and efficiency in public service delivery.
+                            </li>
+                        </ul>
+
+                        <p>
+                            Through his political endeavors, Abdulsalam Shehu Jaji aims to apply his business-oriented approach to governance, focusing on pragmatic solutions that address the needs of his community while fostering sustainable development and economic prosperity.
+                        </p>
+                    </div>
+
+                    <div class="bio-stats">
+                        <div class="stat-item">
+                            <div class="stat-title">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Economic Vision</span>
+                            </div>
+                            <div class="stat-info">
+                                <p>Developing policies that promote sustainable economic growth, entrepreneurship, and job creation.</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-title">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>Educational Initiatives</span>
+                            </div>
+                            <div class="stat-info">
+                                <p>Advocating for improved access to quality education and skills development programs.</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-title">
+                                <i class="fas fa-road"></i>
+                                <span>Infrastructure Focus</span>
+                            </div>
+                            <div class="stat-info">
+                                <p>Prioritizing infrastructure development to enhance community connectivity and economic opportunities.</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-title">
+                                <i class="fas fa-users"></i>
+                                <span>Community Engagement</span>
+                            </div>
+                            <div class="stat-info">
+                                <p>Committed to inclusive governance through active community participation and stakeholder engagement.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat-info">
-                  <p>Ile Jaji, Ogba, Idi Ape, Magagi Aare Ward</p>
+            </section>
+
+            <!-- Achievements Section -->
+            <section id="achievements" class="reveal">
+                <h2 class="section-title">Achievements</h2>
+                <div class="achievements-container">
+                    <div class="achievement-item">
+                        <h3 class="achievement-title">Business Leadership Excellence</h3>
+                        <p class="achievement-desc">
+                            Throughout his career, Jaji has demonstrated exceptional leadership skills, guiding various organizations through periods of growth and transformation. His strategic vision and management expertise have been instrumental in driving innovation and operational
+                            excellence.
+                        </p>
+                    </div>
+
+                    <div class="achievement-item">
+                        <h3 class="achievement-title">Strategic Business Development</h3>
+                        <p class="achievement-desc">
+                            Abdulsalam Shehu Jaji has successfully identified and capitalized on numerous business opportunities, developing comprehensive strategies that have resulted in significant growth and market expansion for the companies he has led.
+                        </p>
+                    </div>
+
+                    <div class="achievement-item">
+                        <h3 class="achievement-title">Organizational Transformation</h3>
+                        <p class="achievement-desc">
+                            As an executive manager and administrator, Jaji has implemented effective organizational changes that have enhanced efficiency, productivity, and overall performance across multiple business entities.
+                        </p>
+                    </div>
+
+                    <div class="achievement-item">
+                        <h3 class="achievement-title">Professional Development</h3>
+                        <p class="achievement-desc">
+                            Jaji's commitment to continuous learning and professional growth is evidenced by his progressive educational achievements and the diverse skill set he has cultivated throughout his career.
+                        </p>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- Image Section -->
-        <section id="image-section">
-          <div class="container">
-            <div class="image-section-content">
-              <img
-                src="./images/Abdulsalam.jpg"
-                alt="Abdulsalam Shehu Jaji"
-                class="image-section-picture"
-              />
-              <div class="image-section-description">
-                <h2>Abdulsalam Shehu Jaji</h2>
-                <p>
-                  <b>Abdulsalam Shehu Jaji</b> is a visionary leader with a
-                  proven track record in business administration, economic
-                  strategy, and organizational transformation. His dedication to
-                  excellence and innovation has positioned him as a key figure
-                  in driving sustainable growth and development.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- Career Section -->
-        <section id="career">
-          <h2 class="section-title">Professional Career</h2>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-content">
-                <p class="timeline-date">2021 - 2024</p>
-                <h3 class="timeline-title">Executive Manager</h3>
-                <p class="timeline-desc">CBM Nigeria Ltd</p>
-              </div>
-            </div>
+            </section>
 
-            <div class="timeline-item">
-              <div class="timeline-content">
-                <p class="timeline-date">2019 - Present</p>
-                <h3 class="timeline-title">Admin Manager</h3>
-                <p class="timeline-desc">CITY Dimension International</p>
-              </div>
-            </div>
+            <!-- Contact Section -->
+            <section id="contact" class="reveal">
+                <h2 class="section-title">Get in Touch</h2>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-content">
+                                <div class="contact-text">
+                                    <h4>Location</h4>
+                                    <p>Ile Jaji, Ogba, Idi Ape, Magagi Aare Ward, Ilorin Kwara State.</p>
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="timeline-item">
-              <div class="timeline-content">
-                <p class="timeline-date">2016 - 2019</p>
-                <h3 class="timeline-title">
-                  State Public Relations Officer & Deputy Manager
-                </h3>
-                <p class="timeline-desc">
-                  Great Northern International Construction Company (GNIC)
-                </p>
-              </div>
-            </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-content">
+                                <div class="contact-text">
+                                    <h4>Email</h4>
+                                    <p>contact@pagersworldglobal.com</p>
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="timeline-item">
-              <div class="timeline-content">
-                <p class="timeline-date">2011 - 2015</p>
-                <h3 class="timeline-title">State Public Relations Officer</h3>
-                <p class="timeline-desc">CGC Nigeria Ltd</p>
-              </div>
-            </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-content">
+                                <div class="contact-text">
+                                    <h4>Phone</h4>
+                                    <p>+234 7062777007</p>
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="timeline-item">
-              <div class="timeline-content">
-                <p class="timeline-date">2008 - 2010</p>
-                <h3 class="timeline-title">
-                  Business Administration Representative
-                </h3>
-                <p class="timeline-desc">AfricanBuys Nigeria Ltd</p>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-content">
-                <p class="timeline-date">Present</p>
-                <h3 class="timeline-title">Chief Executive Officer</h3>
-                <p class="timeline-desc">
-                  Pagers World Global Construction and Crome Nigeria Enterprise
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Expertise Section -->
-        <section id="expertise">
-          <h2 class="section-title">Areas of Expertise</h2>
-          <div class="skills-container">
-            <div class="skill-card">
-              <div class="skill-icon">
-                <i class="fas fa-chart-line"></i>
-              </div>
-              <h3 class="skill-title">Market Research</h3>
-              <p class="skill-desc">
-                Specializes in comprehensive market analysis, identifying
-                trends, consumer behaviors, and competitive landscapes to inform
-                strategic business decisions.
-              </p>
-            </div>
-
-            <div class="skill-card">
-              <div class="skill-icon">
-                <i class="fas fa-handshake"></i>
-              </div>
-              <h3 class="skill-title">Market Negotiation</h3>
-              <p class="skill-desc">
-                Expert in developing and implementing effective negotiation
-                strategies to secure favorable terms and build mutually
-                beneficial business relationships.
-              </p>
-            </div>
-
-            <div class="skill-card">
-              <div class="skill-icon">
-                <i class="fas fa-lightbulb"></i>
-              </div>
-              <h3 class="skill-title">Business Opportunity Identification</h3>
-              <p class="skill-desc">
-                Skilled at recognizing untapped market potential and emerging
-                business opportunities through strategic analysis and industry
-                insights.
-              </p>
-            </div>
-
-            <div class="skill-card">
-              <div class="skill-icon">
-                <i class="fas fa-file-contract"></i>
-              </div>
-              <h3 class="skill-title">Business Proposal Formulation</h3>
-              <p class="skill-desc">
-                Proficient in crafting compelling and comprehensive business
-                proposals that effectively communicate value propositions and
-                strategic initiatives.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <!-- Political Aspirations Section -->
-        <section id="politics">
-          <h2 class="section-title">Political Aspirations</h2>
-          <div class="bio-content">
-            <div class="bio-text">
-              <p>
-                <b>Abdulsalam Shehu Jaji</b> has expressed a keen interest in
-                transitioning his extensive business acumen to the political
-                arena. With a strong background in economic development and
-                market strategies, he aims to contribute meaningfully to public
-                policy and governance.
-              </p>
-
-              <p>
-                His political vision encompasses several key areas of focus:
-              </p>
-
-              <ul style="margin-left: 20px; margin-bottom: 20px">
-                <li style="margin-bottom: 10px">
-                  <strong>Economic Growth:</strong> Leveraging his expertise in
-                  business development to formulate policies that stimulate
-                  economic growth and create sustainable employment
-                  opportunities.
-                </li>
-                <li style="margin-bottom: 10px">
-                  <strong>Education Reform:</strong> Drawing from his diverse
-                  educational background to advocate for improvements in
-                  educational infrastructure and curriculum development.
-                </li>
-                <li style="margin-bottom: 10px">
-                  <strong>Infrastructure Development:</strong> Utilizing his
-                  experience in the construction sector to address
-                  infrastructure challenges and promote community development.
-                </li>
-                <li style="margin-bottom: 10px">
-                  <strong>Public-Private Partnerships:</strong> Facilitating
-                  collaboration between government entities and private sector
-                  organizations to drive innovation and efficiency in public
-                  service delivery.
-                </li>
-              </ul>
-
-              <p>
-                Through his political endeavors, Abdulsalam Shehu Jaji aims to
-                apply his business-oriented approach to governance, focusing on
-                pragmatic solutions that address the needs of his community
-                while fostering sustainable development and economic prosperity.
-              </p>
-            </div>
-
-            <div class="bio-stats">
-              <div class="stat-item">
-                <div class="stat-title">
-                  <i class="fas fa-chart-bar"></i>
-                  <span>Economic Vision</span>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="contact-content">
+                                <div class="contact-text">
+                                    <h4>Website</h4>
+                                    <p><a href="https://abdulsalamshehu.com.ng" target="_blank">abdulsalamshehu.com.ng</a></p>
+                                </div>
+                                <div class="contact-text">
+                                    <h4>Website</h4>
+                                    <p><a href="https://pagersworldglobalconstruction.com" target="_blank">pagersworldglobalconstruction.com</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat-info">
-                  <p>
-                    Developing policies that promote sustainable economic
-                    growth, entrepreneurship, and job creation.
-                  </p>
-                </div>
-              </div>
-
-              <div class="stat-item">
-                <div class="stat-title">
-                  <i class="fas fa-graduation-cap"></i>
-                  <span>Educational Initiatives</span>
-                </div>
-                <div class="stat-info">
-                  <p>
-                    Advocating for improved access to quality education and
-                    skills development programs.
-                  </p>
-                </div>
-              </div>
-
-              <div class="stat-item">
-                <div class="stat-title">
-                  <i class="fas fa-road"></i>
-                  <span>Infrastructure Focus</span>
-                </div>
-                <div class="stat-info">
-                  <p>
-                    Prioritizing infrastructure development to enhance community
-                    connectivity and economic opportunities.
-                  </p>
-                </div>
-              </div>
-
-              <div class="stat-item">
-                <div class="stat-title">
-                  <i class="fas fa-users"></i>
-                  <span>Community Engagement</span>
-                </div>
-                <div class="stat-info">
-                  <p>
-                    Committed to inclusive governance through active community
-                    participation and stakeholder engagement.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- Achievements Section -->
-        <section id="achievements">
-          <h2 class="section-title">Achievements</h2>
-          <div class="achievements-container">
-            <div class="achievement-item">
-              <h3 class="achievement-title">Business Leadership Excellence</h3>
-              <p class="achievement-desc">
-                Throughout his career, Jaji has demonstrated exceptional
-                leadership skills, guiding various organizations through periods
-                of growth and transformation. His strategic vision and
-                management expertise have been instrumental in driving
-                innovation and operational excellence.
-              </p>
-            </div>
-
-            <div class="achievement-item">
-              <h3 class="achievement-title">Strategic Business Development</h3>
-              <p class="achievement-desc">
-                Abdulsalam Shehu Jaji has successfully identified and
-                capitalized on numerous business opportunities, developing
-                comprehensive strategies that have resulted in significant
-                growth and market expansion for the companies he has led.
-              </p>
-            </div>
-
-            <div class="achievement-item">
-              <h3 class="achievement-title">Organizational Transformation</h3>
-              <p class="achievement-desc">
-                As an executive manager and administrator, Jaji has implemented
-                effective organizational changes that have enhanced efficiency,
-                productivity, and overall performance across multiple business
-                entities.
-              </p>
-            </div>
-
-            <div class="achievement-item">
-              <h3 class="achievement-title">Professional Development</h3>
-              <p class="achievement-desc">
-                Jaji's commitment to continuous learning and professional growth
-                is evidenced by his progressive educational achievements and the
-                diverse skill set he has cultivated throughout his career.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact">
-          <h2 class="section-title">Get in Touch</h2>
-          <div class="contact-container">
-            <div class="contact-info">
-              <div class="contact-item">
-                <div class="contact-icon">
-                  <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <div class="contact-text">
-                  <h4>Location</h4>
-                  <p>Ile Jaji, Ogba, Idi Ape, Magagi Aare Ward</p>
-                </div>
-              </div>
-
-              <div class="contact-item">
-                <div class="contact-icon">
-                  <i class="fas fa-envelope"></i>
-                </div>
-                <div class="contact-text">
-                  <h4>Email</h4>
-                  <p>hallynice@gmail.com</p>
-                </div>
-              </div>
-
-              <div class="contact-item">
-                <div class="contact-icon">
-                  <i class="fas fa-phone"></i>
-                </div>
-                <div class="contact-text">
-                  <h4>Phone</h4>
-                  <p>+234 7062777007</p>
-                </div>
-              </div>
-
-              <div class="contact-item">
-                <div class="contact-icon">
-                  <i class="fas fa-globe"></i>
-                </div>
-                <div class="contact-text">
-                  <h4>Website</h4>
-                  <p>www.Abdulsalamshehu.com</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
+            </section>
+        </div>
     </main>
 
     <!-- Footer -->
     <footer>
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-col">
-            <h3>About Abdulsalam Shehu Jaji</h3>
-            <p>
-              A seasoned business administrator and economic strategist with
-              extensive experience in market research, negotiation, and business
-              development.
-            </p>
-          </div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>About Abdulsalam Shehu Jaji</h3>
+                    <p>
+                        A seasoned business administrator and economic strategist with extensive experience in market research, negotiation, and business development.
+                    </p>
+                </div>
 
-          <div class="footer-col">
-            <h3>Quick Links</h3>
-            <ul class="footer-links">
-              <li><a href="#about">About</a></li>
-              <li><a href="#career">Career</a></li>
-              <li><a href="#expertise">Expertise</a></li>
-              <li><a href="#politics">Politics</a></li>
-              <li><a href="#achievements">Achievements</a></li>
-            </ul>
-          </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#career">Career</a></li>
+                        <li><a href="#expertise">Expertise</a></li>
+                        <li><a href="#politics">Politics</a></li>
+                        <li><a href="#achievements">Achievements</a></li>
+                    </ul>
+                </div>
 
-          <div class="footer-col">
-            <h3>Connect</h3>
-            <ul class="footer-links">
-              <li>
-                <a href="#">LinkedIn</a>
-              </li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Facebook</a></li>
-              <li><a href="#">Instagram</a></li>
-            </ul>
-          </div>
+                <div class="footer-col">
+                    <h3>Connect</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://x.com/Powerfulabdul?t=31dMyeW4Typi9ckZbW0v9Q&s=08">Twitter</a></li>
+                        <li><a href="https://www.facebook.com/share/1EAv8mCkAi/">Facebook</a></li>
+                        <li><a href="https://www.instagram.com/abdullekan/profilecard/?igsh=MTBrZHQ2ZjY2dnN1cg==">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Abdulsalam Shehu Jaji. All Rights Reserved.</p>
+            </div>
         </div>
-
-        <div class="footer-bottom">
-          <p>&copy; 2024 Abdulsalam Shehu Jaji. All Rights Reserved.</p>
-        </div>
-      </div>
     </footer>
 
-    <!-- Font Awesome for Icons -->
-    <script
-      src="https://kit.fontawesome.com/a076d05399.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="web.js"></script>
-  </body>
+    <script>
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            });
+        });
+
+        // Reveal animations on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                const revealPoint = 150;
+
+                if (elementTop < windowHeight - revealPoint) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+
+        // Stagger timeline items
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        timelineItems.forEach((item, index) => {
+            item.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // Stagger skill cards
+        const skillCards = document.querySelectorAll('.skill-card');
+        skillCards.forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+    </script>
+</body>
+
 </html>
