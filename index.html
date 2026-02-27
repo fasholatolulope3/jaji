@@ -880,6 +880,35 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(45, 90, 74, 0.2);
         }
+
+        #form-result {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            display: none;
+            text-align: center;
+            font-weight: 500;
+            animation: fadeIn 0.4s ease;
+        }
+
+        #form-result.success {
+            display: block;
+            background: rgba(91, 168, 138, 0.1);
+            color: var(--color-accent);
+            border: 1px solid var(--color-accent);
+        }
+
+        #form-result.error {
+            display: block;
+            background: rgba(239, 68, 68, 0.1);
+            color: #EF4444;
+            border: 1px solid #EF4444;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         
         @media (max-width: 992px) {
             .contact-grid {
@@ -1403,9 +1432,8 @@
                         <!-- Form Side -->
                         <div class="contact-form-side">
                             <div class="contact-form-card">
-                                <form action="https://api.web3forms.com/submit" method="POST">
+                                <form id="contact-form">
                                     <input type="hidden" name="access_key" value="a4fed03b-0c17-42e4-8f1f-ceca7ccc4a6c">
-                                    <input type="hidden" name="redirect" value="https://abdulsalamshehu.com.ng">
                                     <div class="form-group">
                                         <label for="name" class="form-label">Full Name</label>
                                         <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
@@ -1422,11 +1450,12 @@
                                         <label for="message" class="form-label">Your Message</label>
                                         <textarea id="message" name="message" class="form-control" placeholder="Tell me more about your inquiry..." required></textarea>
                                     </div>
-                                    <button type="submit" class="submit-btn">
+                                    <button type="submit" class="submit-btn" id="submit-button">
                                         <span>Send Message</span>
                                         <i class="fas fa-paper-plane"></i>
                                     </button>
                                 </form>
+                                <div id="form-result"></div>
                             </div>
                         </div>
                     </div>
