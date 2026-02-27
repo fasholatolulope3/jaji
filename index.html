@@ -806,6 +806,87 @@
         .contact-text a:hover {
             text-decoration: underline;
         }
+        
+        /* Form Specific Styles */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+            align-items: start;
+        }
+        
+        .contact-form-card {
+            background: var(--color-bg-alt);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--color-text);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 20px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            color: var(--color-text);
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 4px var(--color-accent-subtle);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--color-accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .submit-btn:hover {
+            background: var(--color-accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(45, 90, 74, 0.2);
+        }
+        
+        @media (max-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
         /* ===== FOOTER ===== */
         
         footer {
@@ -1263,56 +1344,87 @@
             <section id="contact" class="reveal">
                 <h2 class="section-title">Get in Touch</h2>
                 <div class="contact-container">
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
+                    <div class="contact-grid">
+                        <!-- Contact Info Side -->
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-content">
+                                    <div class="contact-text">
+                                        <h4>Location</h4>
+                                        <p>Ile Jaji, Ogba, Idi Ape, Magagi Aare Ward, Ilorin Kwara State.</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="contact-content">
-                                <div class="contact-text">
-                                    <h4>Location</h4>
-                                    <p>Ile Jaji, Ogba, Idi Ape, Magagi Aare Ward, Ilorin Kwara State.</p>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-content">
+                                    <div class="contact-text">
+                                        <h4>Email</h4>
+                                        <p>contact@pagersworldglobal.com</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="contact-content">
+                                    <div class="contact-text">
+                                        <h4>Phone</h4>
+                                        <p>+234 7062777007</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div class="contact-content">
+                                    <div class="contact-text">
+                                        <h4>Website</h4>
+                                        <p><a href="https://abdulsalamshehu.com.ng" target="_blank">abdulsalamshehu.com.ng</a></p>
+                                    </div>
+                                    <div class="contact-text">
+                                        <h4>Website</h4>
+                                        <p><a href="https://pagersworldglobalconstruction.com" target="_blank">pagersworldglobalconstruction.com</a></p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-content">
-                                <div class="contact-text">
-                                    <h4>Email</h4>
-                                    <p>contact@pagersworldglobal.com</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="contact-content">
-                                <div class="contact-text">
-                                    <h4>Phone</h4>
-                                    <p>+234 7062777007</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-globe"></i>
-                            </div>
-                            <div class="contact-content">
-                                <div class="contact-text">
-                                    <h4>Website</h4>
-                                    <p><a href="https://abdulsalamshehu.com.ng" target="_blank">abdulsalamshehu.com.ng</a></p>
-                                </div>
-                                <div class="contact-text">
-                                    <h4>Website</h4>
-                                    <p><a href="https://pagersworldglobalconstruction.com" target="_blank">pagersworldglobalconstruction.com</a></p>
-                                </div>
+                        <!-- Form Side -->
+                        <div class="contact-form-side">
+                            <div class="contact-form-card">
+                                <form action="https://formspree.io/f/hallynice@gmail.com" method="POST">
+                                    <div class="form-group">
+                                        <label for="name" class="form-label">Full Name</label>
+                                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email" class="form-label">Email Address</label>
+                                        <input type="email" id="email" name="email" class="form-control" placeholder="email@example.com" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="subject" class="form-label">Subject</label>
+                                        <input type="text" id="subject" name="subject" class="form-control" placeholder="How can I help you?" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message" class="form-label">Your Message</label>
+                                        <textarea id="message" name="message" class="form-control" placeholder="Tell me more about your inquiry..." required></textarea>
+                                    </div>
+                                    <button type="submit" class="submit-btn">
+                                        <span>Send Message</span>
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
